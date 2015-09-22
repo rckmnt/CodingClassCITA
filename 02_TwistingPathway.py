@@ -27,7 +27,15 @@ for i in range(num):
     transCrv.Transform(orient)       # orient rotated curve
     sectionsOut.append(transCrv)    # send to output
     
-    floorCrvsOut.append(Rhino.Geometry.Intersect.Intersection.CurvePlane(transCrv, floorPlane, 0.01))
+    events = Rhino.Geometry.Intersect.Intersection.CurvePlane(transCrv, floorPlane, 0.1)
+
+    #print len(events)
+    #print type(events)
+    #print dir(events[0])
+
+    line = Rhino.Geometry.Line(events[0].PointA, events[1].PointA)
+    floorCrvsOut.append(line)
+
 
 # LOFT CROSS SECTIONS
 
